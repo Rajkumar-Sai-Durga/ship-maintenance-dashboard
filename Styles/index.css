@@ -1,0 +1,39 @@
+.login-bg{
+    background-image: url("../Assists/images/bg-ship-image.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.person-custome{
+    font-size: 100px;
+    color: aliceblue;
+}
+.input::placeholder{
+    color: white;
+    font-weight: bold;
+}
+.input{
+    color: white !important;
+    background-color: rgba(0, 0, 0, .8) !important;
+}
+.icon{
+    color: white;
+    position: absolute;
+    top: 50%;
+    right: 1.5%;
+    transform: translate(-50%, -50%);
+    scale: 1.2;
+}
+.btn-cusm{
+    background-color: rgba(244, 244, 244, .8) !important;
+}
+.btn-cusm:hover{
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+.custome-form{
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+    border-radius: 0 80px 0 80px;
+}
