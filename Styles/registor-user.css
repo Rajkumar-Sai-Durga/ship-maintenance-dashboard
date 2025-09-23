@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.registor-left{
+    background-image: url("../Assists/images/registor-bg-image.jpg");
+    background-position: top;
+}
+.warning{
+    color: red;
+}
