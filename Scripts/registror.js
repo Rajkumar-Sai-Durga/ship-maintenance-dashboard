@@ -1,3 +1,4 @@
+var count=0;
 // Email Validatioin
 document.getElementById("email").addEventListener("input", () => {
   var email = document.getElementById("email").value;
@@ -141,7 +142,7 @@ document.getElementById("create-btn").addEventListener("click", () => {
 // Regsitor Api call
 async function registorApi(userDetails) {
   try {
-    var response = await fetch("http://127.0.0.1:8000/api/users/register", {
+    var response = await fetch("", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,10 +152,9 @@ async function registorApi(userDetails) {
 
     var data = await response.json();
 
-    if (data.token) {
-      alert("Registraion Successfully Completed");
-      localStorage.setItem("accessToken", data.token);
-      window.location.href = "../index.html";
+    if(data){
+      alert("Registration Successfull and you can login now");
+      window.location.href="../view/login.html"
     }
   } catch (error) {
     alert("Registration Failed due to Server");

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../Styles/ships.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container font-size px-0">
+            <a class="navbar-brand d-flex align-items-center me-5" href="#">
+                <img src="../Assists/images/website log.jpg" alt="Logo" width="60" height="60" class="d-inline-block align-text-top">
+                PEARL
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-color fw-bold" href="#">Ships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Components</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Maintenance Job</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item px-3 profile rounded-2">
+                        <a class="nav-link active fw-bold d-flex align-items-center gap-2 profile-color profile-icon" href="profile.html"><i class="bi bi-person-fill "></i>Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Title and Search with filter -->
+    <section>
+        <div class="container px-0 d-flex flex-column gap-3 my-3">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>SHIPS MANAGEMNT</h4>
+                    <p class="text-secondary">Manage your ships and their status</p>
+                </div>
+                
+            </div>
+            <div class="row px-0 border py-2 bg-light rounded-2 px-3"> 
+                <div class="col-sm-7 px-0">
+                    <button class="btn search-btn-styles" id="all-ships">All Ships <span></span></button>
+                    <button class="btn" id="at-port">At Port <span></span></button>
+                    <button class="btn" id="under-maintenance">Under Maintenance <span></span></button>
+                    <button class="btn" id="active">Active <span></span></button>
+                </div>
+                <div class="col-sm-5 d-flex justify-content-end align-items-center">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search by Id" aria-label="Search"/>
+                        <button class="btn btn-styles text-light search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ships list and add new ship -->
+    <section>
+        <div class="container px-0 d-flex flex-column gap-3 my-3">
+            <div class="row px-0 border py-2 bg-light rounded-2 px-3"> 
+                <div class="col-sm-6 px-0 d-flex justify-content-start align-items-center">
+                    <h6 class="mb-0">SHIPS LIST</h6>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                    <button class="btn btn-primary btn-styles"><i class="bi bi-plus-lg"></i> New Ship</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ships list in table -->
+     <section>
+        <div class="container px-0">
+            <table class="table">
+               <th>
+                   <tr>
+                       <th>NAME</th>
+                       <th>IMO NUMBER</th>
+                       <th>FLAG</th>
+                       <th>STATUS</th>
+                       <th class="text-end">ACTIONS</th>
+                   </tr>
+               </th>
+               <tbody id="table-body">
+                   
+               </tbody>
+            </table>
+        </div>
+     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../Scripts/ships.js"></script>
+</body>
+</html>

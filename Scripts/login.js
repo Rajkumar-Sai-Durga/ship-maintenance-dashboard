@@ -25,18 +25,12 @@ async function loginApiCall(userCredentials){
     
         if(data.accessToken){
             alert("Login Successful")
-            
+            localStorage.setItem("accessToken",data.accessToken)
         }
     } catch (error) {
         alert("Login Failed")
     }
 }
-
-
-
-
-
-
 
 document.getElementById("passUnlock").addEventListener("click",()=>{
     var unLock = document.getElementById("passUnlock");
