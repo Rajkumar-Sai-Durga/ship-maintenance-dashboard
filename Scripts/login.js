@@ -23,9 +23,9 @@ async function loginApiCall(userCredentials){
         })
         var data = await response.json()
     
-        if(data.accessToken){
+        if(data.access){
             alert("Login Successful")
-            localStorage.setItem("accessToken",data.accessToken)
+            localStorage.setItem("accessToken",data.access)
         }
     } catch (error) {
         alert("Login Failed")

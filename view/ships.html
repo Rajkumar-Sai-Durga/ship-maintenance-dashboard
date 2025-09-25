@@ -77,7 +77,55 @@
                     <h6 class="mb-0">SHIPS LIST</h6>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-end align-items-center">
-                    <button class="btn btn-primary btn-styles"><i class="bi bi-plus-lg"></i> New Ship</button>
+
+                    <!-- Button for add new ship -->
+                    <button type="button" class="btn btn-primary btn-styles" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bi bi-plus-lg"></i> New Ship
+                    </button>
+                    <!--Form for Ship Details Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-3">
+                                <div class="modal-header border-bottom-0">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Ship Details</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body d-flex flex-column gap-3">
+                                    <div>
+                                        <label for="ship-name" class="form-label">SHIP NAME</label>
+                                        <input type="text" id="ship-name" class="form-control" placeholder="Example: Titanic"></input>
+                                    </div>
+                                    <div>
+                                        <label for="imo-number" class="form-label">IMO NUMBER</label>
+                                        <input type="text" id="imo-number" class="form-control" placeholder="Example: IMO0002345"></input>
+                                    </div>
+                                    <div>
+                                        <label for="flag" class="form-label">FLAG</label>
+                                        <input type="text" id="flag" class="form-control" placeholder="Example: US"></input>
+                                    </div>
+                                    <div>
+                                        <label for="status" class="form-label">STATUS</label>
+                                        <select id="status" class="form-select">
+                                            <option value="" selected disabled>What is the ship status</option>
+                                            <option value="Active">Active</option>
+                                            <option value="At port">At port</option>
+                                            <option value="under maintenance">Undermaintenance</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="users" class="form-label">USER</label>
+                                        <select id="users" class="form-select">
+                                        </select>
+                                        
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-top-0">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="postNewShip">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -161,6 +161,7 @@ var AllShips = [
   }
 ]
 
+// Categories the ships based on status
 var atPortShips=[]
 var underMaintenanceShips=[]
 var activeShips=[]
@@ -217,6 +218,85 @@ document.getElementById("active").addEventListener("click",()=>{
     
 })
 
+// new ships modal
+document.getElementById("users").addEventListener("click",async ()=>{
+  try {
+    // api call for get the user ids
+    // var response = await fetch("",{
+    //   method: "GET",
+    //   headers:{
+    //     "Content-Type": "application/json",
+    //     "Authorization": "Bearer"+localStorage.getItem(accessToken)
+    //   }
+    // })
+    // var users = await response.json()
+    var users =[
+      {
+        id:1,
+        name:"sai",
+        role:"engineer"
+      },
+      {
+        id:2,
+        name:"Raju",
+        role:"engineer"
+      },
+      {
+        id:3,
+        name:"Kumar",
+        role:"Admin"
+      },
+      {
+        id:4,
+        name:"Durga",
+        role:"engineer"
+      }
+    ]
+    var option =`<option value="">What is the ship status</option>`
+    users.forEach((userInfo)=>{
+      option+=`
+        <option value="${userInfo.id}">${userInfo.id} : ${userInfo.name}</option>
+      `
+    })
+    document.getElementById("users").innerHTML=option
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+// post request for add new ship
+document.getElementById("postNewShip").addEventListener("click",async ()=>{
+  try {
+    // ship details for post request
+    var shipInfo={
+      name: document.getElementById("ship-name").value,
+      imo_number: document.getElementById("imo-number").value,
+      flag: document.getElementById("flag").value,
+      status: document.getElementById("status").value,
+      user: document.getElementById("users").value
+    }
+  
+    // post api call
+    // var response = await fetch("",{
+    //   method:"POST",
+    //   headers:{
+    //     "Content-Type":"application/json",
+    //     "Authorization": "Bearer"+localStorage.getItem(accessToken)
+    //   },
+    //   body:JSON.stringify(shipInfo)
+    // })
+    // var data = await response.json()
+
+    // if(data){
+    //   alert("Ship Details Added Successfully")
+    // }
+  }
+  catch (error) {
+    console.log(error)
+  }
+})
+
+// Displaying the ships
 function displayShips(ships){
     var str=``
     ships.forEach((ship)=>{
@@ -227,7 +307,7 @@ function displayShips(ships){
                 <td class="${ship.status}" onclick="shipDetails(${ship.id})">${ship.imo_number}</td>
                 <td class="${ship.status}" onclick="shipDetails(${ship.id})">${ship.flag}</td>
                 <td class="${ship.status}" onclick="shipDetails(${ship.id})">${ship.status}</td>
-                <td class="d-flex gap-4 justify-content-end ${ship.status}"><i class="bi bi-pencil-square text-primary profile-icon edit-delete" onclick="updateShipDetails(${ship.id})"></i><i class="bi bi-trash3-fill text-danger profile-icon edit-delete" onclick="deleteShip(${ship.id})"></i></td>
+                <td class="d-flex gap-4 justify-content-end ${ship.status}"></td>
             </tr>
         </div>
         `
@@ -237,16 +317,8 @@ function displayShips(ships){
 
 displayShips(AllShips)
 
+// Direct to Ship details page
 function shipDetails(id){
     window.location.href="../view/ship-details.html?id="+id;
 }
 
-function updateShipDetails(id){
-    console.log(id);
-    
-}
-
-function deleteShip(id){
-    console.log(id);
-    
-}
