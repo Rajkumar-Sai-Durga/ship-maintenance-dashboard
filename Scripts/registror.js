@@ -142,7 +142,7 @@ document.getElementById("create-btn").addEventListener("click", () => {
 // Regsitor Api call
 async function registorApi(userDetails) {
   try {
-    var response = await fetch("", {
+    var response = await fetch("http://127.0.0.1:8000/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -152,9 +152,12 @@ async function registorApi(userDetails) {
 
     var data = await response.json();
 
-    if(data){
-      alert("Registration Successfull and you can login now");
-      window.location.href="../view/login.html"
+    if(response.ok){
+      alert("Registration Successfull, Login now");
+      window.location.href="../index.log"
+    }
+    else{
+      alert(JSON.stringify(response.error))
     }
   } catch (error) {
     alert("Registration Failed due to Server");

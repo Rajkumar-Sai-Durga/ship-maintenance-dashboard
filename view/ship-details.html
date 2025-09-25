@@ -1,36 +1,123 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Styles/ship-details.css">
-  </head>
-  <body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="../Styles/ship-details.css" />
+</head>
+
+<body>
     <section>
         <div class="container">
-            <div>
-                <h2 class="fw-bolder">Ship Profile: <span id="ship-name">Titanic</span> (IMO: <span id="imo-number">0000000</span>)</h2>
-                <p class="text-secondary">IMO Number: <span id="imo-number">0000000</span></p>
-                <p class="text-secondary">Flag: <span id="flag">0000000</span> | Status: <span id="status">Active</span></p>
-            </div>
-            <div class="ship-bg-image rounded-2">
-                
+            <!-- Titles -->
+            <div class="row mb-3">
+                <div class="col-md-8">
+                    <h2 class="fw-bolder">
+                        Ship Profile: <span id="ship-name">Titanic</span> (<span class="imo-number">0000000</span>)
+                    </h2>
+                </div>
+                <div class="col-md-4 d-flex justify-content-end">
+                    <!-- Button for add new ship -->
+                    <button type="button" class="btn btn-primary btn-styles" id="putDetails" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <i class="bi bi-pencil-square icon-size"></i>
+                    </button>
+                </div>
+                <!--Form for Ship Details Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content p-3">
+                            <div class="modal-header border-bottom-0">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    New Ship Details
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex flex-column gap-3">
+                                <div>
+                                    <label for="ship-name" class="form-label">SHIP NAME</label>
+                                    <input type="text" id="form-ship-name" class="form-control"
+                                        placeholder="Example: Titanic" />
+                                </div>
+                                <div>
+                                    <label for="imo-number" class="form-label">IMO NUMBER</label>
+                                    <input type="text" id="form-imo-number" class="form-control"
+                                        placeholder="Example: IMO0002345" />
+                                </div>
+                                <div>
+                                    <label for="flag" class="form-label">FLAG</label>
+                                    <input type="text" id="form-flag" class="form-control" placeholder="Example: US" />
+                                </div>
+                                <div>
+                                    <label for="status" class="form-label">STATUS</label>
+                                    <select id="form-status" class="form-select">
+                                        <option value="" selected disabled>
+                                            What is the ship status
+                                        </option>
+                                        <option value="Active">Active</option>
+                                        <option value="At port">At port</option>
+                                        <option value="under maintenance">
+                                            Undermaintenance
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-top-0">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary" id="updateShip">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
-                <div class="col-md"></div>
-                <div class="col-md"></div>
+                <div class="col-md-6">
+                    <p class="text-secondary mb-0">
+                        IMO Number: <span class="imo-number">0000000</span>
+                    </p>
+                    <p class="text-secondary">
+                        Flag: <span id="flag">0000000</span> | Made:
+                        <span id="created">2345</span>
+                    </p>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-end">
+                    <h3 id="ship-status" class="">at port</h3>
+                </div>
             </div>
-            <div class="fw-bolder">
-                <button class="btn btn-primary fw-bolder">EDIT</button>
-                <button class="btn text-light bg-danger fw-bolder" id="delete-ship">DELETE</button>
+
+            <!-- background image -->
+            <div class="ship-bg-image rounded-2"></div>
+
+            <!-- Details -->
+            <div class="row">
+                <!-- Components Details -->
+                <div class="col-md">
+                    <table></table>
+                </div>
+
+                <!-- Maintenance history -->
+                <div class="col-md">
+                    <h4>General Information</h4>
+                </div>
             </div>
         </div>
     </section>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
     <script src="../Scripts/ship-details.js"></script>
 </body>
+
 </html>

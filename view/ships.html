@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../Styles/ships.css">
   </head>
   <body>
+    <!-- nav bar -->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container font-size px-0">
             <a class="navbar-brand d-flex align-items-center me-5" href="#">
@@ -21,7 +22,7 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <ul class="navbar-nav gap-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="../view/home.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-color fw-bold" href="#">Ships</a>
@@ -79,7 +80,7 @@
                 <div class="col-sm-6 d-flex justify-content-end align-items-center">
 
                     <!-- Button for add new ship -->
-                    <button type="button" class="btn btn-primary btn-styles" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-primary btn-styles" id="users" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i class="bi bi-plus-lg"></i> New Ship
                     </button>
                     <!--Form for Ship Details Modal -->
@@ -93,15 +94,15 @@
                                 <div class="modal-body d-flex flex-column gap-3">
                                     <div>
                                         <label for="ship-name" class="form-label">SHIP NAME</label>
-                                        <input type="text" id="ship-name" class="form-control" placeholder="Example: Titanic"></input>
+                                        <input type="text" id="ship-name" class="form-control" placeholder="Example: Titanic">
                                     </div>
                                     <div>
                                         <label for="imo-number" class="form-label">IMO NUMBER</label>
-                                        <input type="text" id="imo-number" class="form-control" placeholder="Example: IMO0002345"></input>
+                                        <input type="text" id="imo-number" class="form-control" placeholder="Example: IMO0002345">
                                     </div>
                                     <div>
                                         <label for="flag" class="form-label">FLAG</label>
-                                        <input type="text" id="flag" class="form-control" placeholder="Example: US"></input>
+                                        <input type="text" id="flag" class="form-control" placeholder="Example: US">
                                     </div>
                                     <div>
                                         <label for="status" class="form-label">STATUS</label>
@@ -114,7 +115,7 @@
                                     </div>
                                     <div>
                                         <label for="users" class="form-label">USER</label>
-                                        <select id="users" class="form-select">
+                                        <select id="users-ids" class="form-select">
                                         </select>
                                         
                                     </div>
@@ -137,11 +138,14 @@
             <table class="table">
                <th>
                    <tr>
+                       <th>ID</th>
                        <th>NAME</th>
                        <th>IMO NUMBER</th>
                        <th>FLAG</th>
                        <th>STATUS</th>
-                       <th class="text-end">ACTIONS</th>
+                       <th>UPDATED AT</th>
+                       <th>CREATED AT</th>
+                       <th class="text-end">DETAILES</th>
                    </tr>
                </th>
                <tbody id="table-body">

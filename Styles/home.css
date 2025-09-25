@@ -1,0 +1,16 @@
+.font-size{
+    font-size: 20px;
+}
+.text-color{
+    color: rgb(0, 73, 182) !important;
+    border-bottom: 1px rgb(0, 73, 182) solid;
+}
+.profile{
+    border: 1px solid rgb(0, 73, 182);
+}
+.profile-icon{
+    scale: 1.2;
+}
+.profile-color{
+    color: rgb(0, 73, 182) !important
+}

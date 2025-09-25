@@ -1,6 +1,4 @@
-*{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+
 .profile-color{
     color: rgb(0, 73, 182) !important
 }
@@ -10,4 +8,26 @@
     background-size: cover;
     background-position: center;
     height: 400px;
+}
+.icon-size{
+    font-size: 25px;
+}
+.Active{
+    background-color: rgb(0, 255, 89) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+}
+
+.At{
+    background-color: rgb(0, 110, 255) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+}
+.Under{
+    background-color: rgb(255, 29, 4) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
 }

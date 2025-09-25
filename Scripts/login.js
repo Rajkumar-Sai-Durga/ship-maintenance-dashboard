@@ -6,7 +6,6 @@ document.getElementById("loginBtn").addEventListener("click",()=>{
         username :username,
         password :password
     }
-    console.log(userCredentials);
     
     // Api function
     loginApiCall(userCredentials)
@@ -22,13 +21,17 @@ async function loginApiCall(userCredentials){
             body:JSON.stringify(userCredentials)
         })
         var data = await response.json()
-    
-        if(data.access){
+        
+        if(response.ok){
             alert("Login Successful")
+            window.location.href="../view/home.html"
             localStorage.setItem("accessToken",data.access)
         }
+        else{
+            alert(JSON.stringify(response.error)+" User credentials")
+        }
     } catch (error) {
-        alert("Login Failed")
+        alert("Login Failed due to server")
     }
 }
 
