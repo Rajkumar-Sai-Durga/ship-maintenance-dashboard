@@ -31,6 +31,11 @@ async function shipApiCall() {
         underMaintenanceShips.push(ship);
       }
     });
+
+    document.getElementById("all-ships-length").innerHTML=allShips.length
+    document.getElementById("active-ships-length").innerHTML=activeShips.length
+    document.getElementById("port-ships-length").innerHTML=atPortShips.length
+    document.getElementById("maintenance-ships-length").innerHTML=underMaintenanceShips.length
   } catch (error) {
     console.log(error);
   }

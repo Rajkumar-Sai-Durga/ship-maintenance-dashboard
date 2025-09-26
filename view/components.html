@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ships Page</title>
+    <title>Ship Components</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../Styles/ships.css">
+    <link rel="stylesheet" href="../Styles/components.css">
   </head>
   <body>
     <!-- nav bar -->
@@ -22,13 +22,13 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <ul class="navbar-nav gap-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="../view/home.html">Home</a>
+                        <a class="nav-link" href="./home.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-color fw-bold" href="#">Ships</a>
+                        <a class="nav-link" href="./ships.html">Ships</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./components.html">Components</a>
+                        <a class="nav-link active text-color fw-bold" href="#">Components</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Maintenance Job</a>
@@ -43,47 +43,37 @@
         </div>
     </nav>
 
-    <!-- Title and Search with filter -->
+     <!-- Title and Search with filter -->
     <section>
         <div class="container px-0 d-flex flex-column gap-3 my-3">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4>SHIPS MANAGEMNT</h4>
-                    <p class="text-secondary">Manage your ships and their status</p>
+                    <h4>SHIP COMPONENTS</h4>
+                    <p class="text-secondary">Manage and track all ship components</p>
                 </div>
-                
             </div>
             <div class="row px-0 border py-2 bg-light rounded-2 px-3"> 
-                <div class="col-sm-7 px-0">
-                    <button class="btn search-btn-styles" id="all-ships">All Ships <span id="all-ships-length" class="ms-1">0</span></button>
-                    <button class="btn" id="at-port">At Port <span id="port-ships-length" class="ms-1">0</span></button>
-                    <button class="btn" id="under-maintenance">Under Maintenance <span id="maintenance-ships-length" class="ms-1">0</span></button>
-                    <button class="btn" id="active">Active <span id="active-ships-length" class="ms-1">0</span></button>
-                </div>
-                <div class="col-sm-5 d-flex justify-content-end align-items-center">
-                    <div class="d-flex">
-                        <input class="form-control me-2" type="search" id="search-input" placeholder="Id | Name | IMO number" aria-label="Search"/>
-                        <button class="btn btn-styles text-light search" id="search-input-btn"><i class="bi bi-search"></i></button>
+                <div class="col-sm-7 px-0 ">
+                    <div class="row">
+                        <div class="col-sm ms-2 position-relative">
+                            <label for="ship-id-dropdown" class="down-arrow">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </label>
+                            <select id="ship-id-dropdown" class="form-control">
+                            </select>
+                        </div>
+                        <div class="col-sm-8 d-flex">
+                            <input class="form-control me-2" type="search" id="search-input" placeholder="Search Component by Name, Id, Serial number" aria-label="Search"/>
+                            <button class="btn btn-styles text-light search" id="search-input-btn"><i class="bi bi-search"></i></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ships list and add new ship -->
-    <section>
-        <div class="container px-0 d-flex flex-column gap-3 my-3">
-            <div class="row px-0 border py-2 bg-light rounded-2 px-3"> 
-                <div class="col-sm-6 px-0 d-flex justify-content-start align-items-center">
-                    <h6 class="mb-0">SHIPS LIST</h6>
-                </div>
-                <div class="col-sm-6 d-flex justify-content-end align-items-center">
-
-                    <!-- Button for add new ship -->
-                    <button type="button" class="btn btn-primary btn-styles" id="users" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="bi bi-plus-lg"></i> New Ship
+                <div class="col-sm-5 d-flex justify-content-end align-items-center">
+                    <!-- Button for add new ship component -->
+                    <button type="button" class="btn btn-primary btn-styles" id="addComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bi bi-plus-lg"></i> New Component
                     </button>
-                    <!--Form for Ship Details Modal -->
+                    <!--Form for Ship Component Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content p-3">
@@ -93,24 +83,24 @@
                                 </div>
                                 <div class="modal-body d-flex flex-column gap-3">
                                     <div>
-                                        <label for="ship-name" class="form-label">SHIP NAME</label>
-                                        <input type="text" id="ship-name" class="form-control" placeholder="Example: Titanic">
+                                        <label for="component-name" class="form-label">COMPONENT NAME</label>
+                                        <input type="text" id="component-name" class="form-control" placeholder="Example: Radar System">
                                     </div>
                                     <div>
-                                        <label for="imo-number" class="form-label">IMO NUMBER</label>
-                                        <input type="text" id="imo-number" class="form-control" placeholder="Example: IMO0002345">
+                                        <label for="serial-number" class="form-label">SERIAL NUMBER</label>
+                                        <input type="text" id="serial-number" class="form-control" placeholder="Example: RAD-2025-004">
                                     </div>
                                     <div>
-                                        <label for="flag" class="form-label">FLAG</label>
-                                        <input type="text" id="flag" class="form-control" placeholder="Example: US">
+                                        <label for="installed-date" class="form-label">INSTALLED DATE</label>
+                                        <input type="date" id="installed-date" class="form-control" >
                                     </div>
                                     <div>
-                                        <label for="status" class="form-label">STATUS</label>
-                                        <select id="status" class="form-select">
-                                            <option value="" selected disabled>What is the ship status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="At port">At port</option>
-                                            <option value="Under maintenance">Undermaintenance</option>
+                                        <label for="last-maintenance-date" class="form-label">LAST MAINTENANCE DATE</label>
+                                        <input type="date" id="last-maintenance-date" class="form-control">
+                                    </div>
+                                    <div>
+                                        <label for="ship-ids" class="form-label">SHIP ID</label>
+                                        <select id="ship-ids" class="form-select">
                                         </select>
                                     </div>
                                 </div>
@@ -126,7 +116,7 @@
         </div>
     </section>
 
-    <!-- Ships list in table -->
+    <!-- Components list table -->
      <section>
         <div class="container px-0">
             <table class="table">
@@ -134,22 +124,19 @@
                    <tr>
                        <th>ID</th>
                        <th>NAME</th>
-                       <th>IMO NUMBER</th>
-                       <th>FLAG</th>
-                       <th>UPDATED AT</th>
-                       <th>CREATED AT</th>
-                       <th>STATUS</th>
+                       <th>SERIAL NUMBER</th>
+                       <th>INSTALLED</th>
+                       <th>LAST MAINTENANCE</th>
                        <th class="text-end">ACTIONS</th>
                    </tr>
                </th>
                <tbody id="table-body">
-                   
                </tbody>
             </table>
         </div>
      </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="../Scripts/ships.js"></script>
-</body>
+    <script src="../Scripts/components.js"></script>
+  </body>
 </html>
