@@ -21,7 +21,7 @@ async function getShipDetails(){
     if(response.ok){
       document.getElementById("ship-name").innerHTML=shipInfo.name
       document.getElementById("flag").innerHTML=shipInfo.flag
-      document.getElementById("created").innerHTML=shipInfo.created_at
+      document.getElementById("created").innerHTML=foramatedDate(shipInfo.created_at)
       document.getElementsByClassName("imo-number")[0].innerHTML=shipInfo.imo_number
       document.getElementsByClassName("imo-number")[1].innerHTML=shipInfo.imo_number
       var sta = document.getElementById("ship-status")
@@ -41,6 +41,17 @@ async function getShipDetails(){
 }
 getShipDetails()
 
+function foramatedDate(input){
+  var date = new Date(input)
+
+  var year = date.getFullYear().toString().length == 1 ? '0'+date.getFullYear() : date.getFullYear()
+  var month = date.getMonth().toString().length == 1 ? '0'+date.getMonth() : date.getMonth()
+  var day = date.getDay().toString().length == 1 ? '0'+date.getDay() : date.getDay()
+
+  return `${year}-${month}-${day}`
+}
+
+// put the ship details in update details form
 document.getElementById("putDetails").addEventListener("click",()=>{
   document.getElementById("form-ship-name").value=ship.name,
   document.getElementById("form-imo-number").value=ship.imo_number,
@@ -55,13 +66,13 @@ document.getElementById("updateShip").addEventListener("click",()=>{
     name: document.getElementById("form-ship-name").value,
     imo_number: document.getElementById("form-imo-number").value,
     flag: document.getElementById("form-flag").value,
-    status: document.getElementById("form-status").value
+    status: document.getElementById("form-status").value,
+    user: localStorage.getItem("userId")
   }
   updateShipDetails(shipInfo)
 })
 async function updateShipDetails(shipInfo){
   console.log(shipInfo);
-  
   try{
     var response = await fetch("http://127.0.0.1:8000/api/ships/update/"+id,{
       method:"PUT",
@@ -76,7 +87,7 @@ async function updateShipDetails(shipInfo){
 
     if(response.ok){
       alert("Ship Details Updated Successfully")
-      window.location.href="../views/ship-details.html"
+      getShipDetails()
     }
     else{
       alert(JSON.stringify(response.error))
@@ -88,3 +99,84 @@ async function updateShipDetails(shipInfo){
   }
 }
 
+//components list
+async function shipComponents(){
+  try {
+    var response = await fetch("http://127.0.0.1:8000/api/ship-components/filter/"+id,{
+      method:"GET",
+      headers:{
+        "Content-Type": "application/json",
+        "Authorization": "Bearer "+accessToken
+      }
+    })
+  
+    var components = await response.json()
+
+    if(response.ok){
+      displayComponents(components)
+    }
+    else{
+      console.log(response.error);
+    }
+
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+shipComponents()
+function displayComponents(components){
+  var row = ``
+  components.forEach(element => {
+    row+=`
+      <tr>
+        <td>${element.serial_number}</td>
+        <td>${element.name}</td>
+        <td>${foramatedDate(element.installation_date)}</td>
+        <td>${foramatedDate(element.last_maintenance_date)}</td>
+      </tr>
+    `
+  })
+  document.getElementById("com-table-body").innerHTML=row
+}
+
+//Maintenance history
+async function shipMaintenanceHistory(){
+  try {
+    var response = await fetch("http://127.0.0.1:8000/api/maintenance-jobs/filter?ship="+id,{
+      method:"GET",
+      headers:{
+        "Content-Type": "application/json",
+        "Authorization": "Bearer "+accessToken
+      }
+    })
+  
+    var history = await response.json()
+
+    if(response.ok){
+      displayHistory(history)
+    }
+    else{
+      console.log(response.error);
+    }
+
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+shipMaintenanceHistory()
+function displayHistory(history){
+  var row = ``
+  history.forEach(element => {
+    row+=`
+      <tr>
+        <td>${element.type}</td>
+        <td>${element.priority}</td>
+        <td>${element.status}</td>
+        <td>${element.assigned_engineer}</td>
+      </tr>
+    `
+  })
+  document.getElementById("main-table-body").innerHTML=row
+}

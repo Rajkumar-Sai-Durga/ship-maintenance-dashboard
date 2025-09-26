@@ -11,12 +11,11 @@ async function shipApiCall() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + accessToken
+        Authorization: "Bearer " + accessToken,
       },
     });
     var data = await response.json();
 
-    
     if (response.ok) {
       displayShips(data);
       allShips = data;
@@ -65,32 +64,42 @@ function displayShips(ships) {
                     </div>
                     <div class="modal-footer border-top-0 p-0 justify-content-start">
                       <button type="button" class="btn btn-secondary ms-0" data-bs-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-danger" onclick="deleteShip(${ship.id})">Delete</button>
+                      <button type="button" class="btn btn-danger" onclick="deleteShip(${
+                        ship.id
+                      })">Delete</button>
                     </div>
                   </div>
                 </div>
               </div>
-              <i class="bi bi-three-dots-vertical p-2 more" onclick="shipDetails(${ship.id})"></i>
+              <i class="bi bi-three-dots-vertical p-2 more" onclick="shipDetails(${
+                ship.id
+              })"></i>
             </td>
           </tr>
         </div>
         `;
-    document.getElementById("table-body").innerHTML=""
+    document.getElementById("table-body").innerHTML = "";
     document.getElementById("table-body").innerHTML = str;
   });
-
 }
-function foramatedDate(input){
-  var date = new Date(input)
+function foramatedDate(input) {
+  var date = new Date(input);
 
-  var year = date.getFullYear().toString().length == 1 ? '0'+date.getFullYear() : date.getFullYear()
-  var month = date.getMonth().toString().length == 1 ? '0'+date.getMonth() : date.getMonth()
-  var day = date.getDay().toString().length == 1 ? '0'+date.getDay() : date.getDay()
+  var year =
+    date.getFullYear().toString().length == 1
+      ? "0" + date.getFullYear()
+      : date.getFullYear();
+  var month =
+    date.getMonth().toString().length == 1
+      ? "0" + date.getMonth()
+      : date.getMonth();
+  var day =
+    date.getDay().toString().length == 1 ? "0" + date.getDay() : date.getDay();
 
-  return `${year}/${month}/${day}`
+  return `${year}/${month}/${day}`;
 }
 
-// All the ships List 
+// All the ships List
 document.getElementById("all-ships").addEventListener("click", () => {
   document.getElementById("all-ships").classList.add("search-btn-styles");
   document
@@ -138,6 +147,69 @@ document.getElementById("active").addEventListener("click", () => {
   displayShips(activeShips);
 });
 
+// seach ship api call
+document.getElementById("search-input-btn").addEventListener("click", () => {
+  var inputSearch = document.getElementById("search-input").value;
+  console.log(allShips);
+  
+  var shipArray = allShips.filter((element) => 
+    element.imo_number == inputSearch || 
+    element.id == inputSearch || 
+    element.name.toLowerCase() == inputSearch.toLowerCase() || 
+    element.status.toLowerCase() == inputSearch.toLowerCase() || 
+    element.flag.toLowerCase() == inputSearch.toLowerCase()
+  );
+  console.log(shipArray);
+  
+  if(shipArray.length > 0){
+    var str = ``
+    shipArray.forEach((ship)=>{
+        str += `
+          <div class="py-1">
+            <tr>
+              <td >${ship.id}</td>
+              <td >${ship.name}</td>
+              <td >${ship.imo_number}</td>
+              <td >${ship.flag}</td>
+              <td >${foramatedDate(ship.updated_at)}</td>
+              <td >${foramatedDate(ship.created_at)}</td>
+              <td><p class="${ship.status} d-inline">${ship.status}</p></td>
+              <td class="text-end">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                  <i class="bi bi-trash3-fill delete p-2"></i>
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-4">
+                      <div class="modal-body p-0 mb-4">
+                        <h5 class="mb-0 text-start">ARE YOU SURE?</h5>
+                      </div>
+                      <div class="modal-footer border-top-0 p-0 justify-content-start">
+                        <button type="button" class="btn btn-secondary ms-0" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteShip(${
+                          ship.id
+                        })">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <i class="bi bi-three-dots-vertical p-2 more" onclick="shipDetails(${
+                  ship.id
+                })"></i>
+              </td>
+            </tr>
+          </div>
+          `;
+      }) 
+    document.getElementById("table-body").innerHTML = "";
+    document.getElementById("table-body").innerHTML = str;
+  }
+  else{
+    document.getElementById("table-body").innerHTML = "";
+  }
+});
+
 // post request for add new ship
 document.getElementById("postNewShip").addEventListener("click", async () => {
   try {
@@ -155,7 +227,7 @@ document.getElementById("postNewShip").addEventListener("click", async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + accessToken
+        Authorization: "Bearer " + accessToken,
       },
       body: JSON.stringify(shipInfo),
     });
@@ -163,7 +235,7 @@ document.getElementById("postNewShip").addEventListener("click", async () => {
 
     if (response.ok) {
       alert("Ship Details Added Successfully");
-      window.location.href="../view/ships.html"
+      window.location.href = "../view/ships.html";
     } else {
       alert(JSON.stringify(response.error));
     }
@@ -173,27 +245,25 @@ document.getElementById("postNewShip").addEventListener("click", async () => {
 });
 
 // Delete ship functionality
-async function deleteShip(id){
+async function deleteShip(id) {
   try {
-    var response = await fetch("http://127.0.0.1:8000/api/ships/delete/"+id,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization": "Bearer "+accessToken
-      }
-    })
-    var data = await response.json()
+    var response = await fetch("http://127.0.0.1:8000/api/ships/delete/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    });
+    var data = await response.json();
     console.log(data);
-    
-    if(data){
-      window.location.href="../view/ships.html"
-    }
-    else{
-      alert(`ship Delete requet failed`)
+
+    if (data) {
+      window.location.href = "../view/ships.html";
+    } else {
+      alert(`ship Delete requet failed`);
     }
   } catch (error) {
     console.log(error);
-    
   }
 }
 

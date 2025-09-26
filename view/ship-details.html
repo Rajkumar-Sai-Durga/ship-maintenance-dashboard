@@ -15,9 +15,10 @@
     <section>
         <div class="container">
             <!-- Titles -->
-            <div class="row mb-3">
+            <div class="row my-3">
                 <div class="col-md-8">
                     <h2 class="fw-bolder">
+                        <a href="ships.html"><i class="bi bi-arrow-left"></i></a>
                         Ship Profile: <span id="ship-name">Titanic</span> (<span class="imo-number">0000000</span>)
                     </h2>
                 </div>
@@ -63,7 +64,7 @@
                                         </option>
                                         <option value="Active">Active</option>
                                         <option value="At port">At port</option>
-                                        <option value="under maintenance">
+                                        <option value="Under maintenance">
                                             Undermaintenance
                                         </option>
                                     </select>
@@ -87,12 +88,12 @@
                         IMO Number: <span class="imo-number">0000000</span>
                     </p>
                     <p class="text-secondary">
-                        Flag: <span id="flag">0000000</span> | Made:
+                        Flag: <span id="flag">0000000</span> | Created:
                         <span id="created">2345</span>
                     </p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-end">
-                    <h3 id="ship-status" class="">at port</h3>
+                    <h5 id="ship-status" class="">at port</h5>
                 </div>
             </div>
 
@@ -100,15 +101,41 @@
             <div class="ship-bg-image rounded-2"></div>
 
             <!-- Details -->
-            <div class="row">
+            <div class="row py-4">
                 <!-- Components Details -->
                 <div class="col-md">
-                    <table></table>
+                    <h4 class="fw-bolder">Components Installed</h4>
+                    <table class="table border">
+                        <thead>
+                            <tr>
+                                <th>SERIAL NUMBER</th>
+                                <th>COMPONENT</th>
+                                <th>INSTALLED</th>
+                                <th>LAST MAINTENANCE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="com-table-body">
+                            
+                        </tbody>
+                    </table>
                 </div>
 
                 <!-- Maintenance history -->
                 <div class="col-md">
-                    <h4>General Information</h4>
+                    <h4 class="fw-bolder">Maintaince history</h4>
+                    <table class="table border">
+                        <thead>
+                            <tr>
+                                <th>TYPE</th>
+                                <th>PRIORITY</th>
+                                <th>STATUS</th>
+                                <th>ASSIGNED ENGINNER ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="main-table-body">
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
