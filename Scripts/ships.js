@@ -3,7 +3,6 @@ var atPortShips = [];
 var underMaintenanceShips = [];
 var activeShips = [];
 var accessToken = localStorage.getItem("accessToken");
-console.log(accessToken);
 
 // Ships api call
 async function shipApiCall() {
@@ -17,7 +16,9 @@ async function shipApiCall() {
     });
     var data = await response.json();
 
+    
     if (response.ok) {
+      displayShips(data);
       allShips = data;
     }
 
@@ -37,7 +38,59 @@ async function shipApiCall() {
 }
 shipApiCall();
 
+// Displaying the ships
+function displayShips(ships) {
+  var str = ``;
+  ships.forEach((ship) => {
+    str += `
+        <div class="py-1">
+          <tr>
+            <td >${ship.id}</td>
+            <td >${ship.name}</td>
+            <td >${ship.imo_number}</td>
+            <td >${ship.flag}</td>
+            <td >${foramatedDate(ship.updated_at)}</td>
+            <td >${foramatedDate(ship.created_at)}</td>
+            <td><p class="${ship.status} d-inline">${ship.status}</p></td>
+            <td class="text-end">
+              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="bi bi-trash3-fill delete p-2"></i>
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content p-4">
+                    <div class="modal-body p-0 mb-4">
+                      <h5 class="mb-0 text-start">ARE YOU SURE?</h5>
+                    </div>
+                    <div class="modal-footer border-top-0 p-0 justify-content-start">
+                      <button type="button" class="btn btn-secondary ms-0" data-bs-dismiss="modal">No</button>
+                      <button type="button" class="btn btn-danger" onclick="deleteShip(${ship.id})">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <i class="bi bi-three-dots-vertical p-2 more" onclick="shipDetails(${ship.id})"></i>
+            </td>
+          </tr>
+        </div>
+        `;
+    document.getElementById("table-body").innerHTML=""
+    document.getElementById("table-body").innerHTML = str;
+  });
 
+}
+function foramatedDate(input){
+  var date = new Date(input)
+
+  var year = date.getFullYear().toString().length == 1 ? '0'+date.getFullYear() : date.getFullYear()
+  var month = date.getMonth().toString().length == 1 ? '0'+date.getMonth() : date.getMonth()
+  var day = date.getDay().toString().length == 1 ? '0'+date.getDay() : date.getDay()
+
+  return `${year}/${month}/${day}`
+}
+
+// All the ships List 
 document.getElementById("all-ships").addEventListener("click", () => {
   document.getElementById("all-ships").classList.add("search-btn-styles");
   document
@@ -49,6 +102,7 @@ document.getElementById("all-ships").addEventListener("click", () => {
   displayShips(allShips);
 });
 
+// At port Statused ship list
 document.getElementById("at-port").addEventListener("click", () => {
   document.getElementById("all-ships").classList.remove("search-btn-styles");
   document
@@ -60,6 +114,7 @@ document.getElementById("at-port").addEventListener("click", () => {
   displayShips(atPortShips);
 });
 
+// Undermaintenance Statused ship list
 document.getElementById("under-maintenance").addEventListener("click", () => {
   document.getElementById("all-ships").classList.remove("search-btn-styles");
   document
@@ -71,6 +126,7 @@ document.getElementById("under-maintenance").addEventListener("click", () => {
   displayShips(underMaintenanceShips);
 });
 
+// Active Statused ship list
 document.getElementById("active").addEventListener("click", () => {
   document.getElementById("all-ships").classList.remove("search-btn-styles");
   document
@@ -82,59 +138,6 @@ document.getElementById("active").addEventListener("click", () => {
   displayShips(activeShips);
 });
 
-// Displaying the ships
-function displayShips(ships) {
-  var str = ``;
-  ships.forEach((ship) => {
-    str += `
-        <div class="py-1">
-          <tr>
-            <td class="${ship.status}">${ship.id}</td>
-            <td class="${ship.status}">${ship.name}</td>
-            <td class="${ship.status}">${ship.imo_number}</td>
-            <td class="${ship.status}">${ship.flag}</td>
-            <td class="${ship.status}">${ship.status}</td>
-            <td class="${ship.status}">${ship.updated_at}</td>
-            <td class="${ship.status}">${ship.created_at}</td>
-            <td class="text-end ${ship.status}"><button class="btn btn-primary" onclick="shipDetails(${ship.id})">More</button></td>
-          </tr>
-        </div>
-        `;
-    document.getElementById("table-body").innerHTML=""
-    document.getElementById("table-body").innerHTML = str;
-  });
-}
-
-displayShips(allShips);
-
-// new ships modal
-async function userIds(){
-  try {
-    // api call for get the user ids
-    var response = await fetch("http://127.0.0.1:8000/api/users", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + accessToken
-      },
-    });
-    var data = await response.json();
-    var users = data.data
-    console.log(users);
-    
-    var option = `<option value="">What is the ship status</option>`;
-    users.forEach((userInfo) => {
-      option += `
-        <option value="${userInfo.id}">${userInfo.id} : ${userInfo.username}</option>
-      `;
-    });
-    document.getElementById("users-ids").innerHTML = option;
-  } catch (error) {
-    console.log(error);
-  }
-};
-userIds();
-
 // post request for add new ship
 document.getElementById("postNewShip").addEventListener("click", async () => {
   try {
@@ -144,7 +147,7 @@ document.getElementById("postNewShip").addEventListener("click", async () => {
       imo_number: document.getElementById("imo-number").value,
       flag: document.getElementById("flag").value,
       status: document.getElementById("status").value,
-      user: document.getElementById("users-ids").value,
+      user: localStorage.getItem("userId"),
     };
 
     // post api call
@@ -160,6 +163,7 @@ document.getElementById("postNewShip").addEventListener("click", async () => {
 
     if (response.ok) {
       alert("Ship Details Added Successfully");
+      window.location.href="../view/ships.html"
     } else {
       alert(JSON.stringify(response.error));
     }
@@ -167,6 +171,31 @@ document.getElementById("postNewShip").addEventListener("click", async () => {
     console.log(error);
   }
 });
+
+// Delete ship functionality
+async function deleteShip(id){
+  try {
+    var response = await fetch("http://127.0.0.1:8000/api/ships/delete/"+id,{
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization": "Bearer "+accessToken
+      }
+    })
+    var data = await response.json()
+    console.log(data);
+    
+    if(data){
+      window.location.href="../view/ships.html"
+    }
+    else{
+      alert(`ship Delete requet failed`)
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 
 // Direct to Ship details page
 function shipDetails(id) {

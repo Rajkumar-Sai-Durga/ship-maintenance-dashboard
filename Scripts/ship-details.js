@@ -88,24 +88,3 @@ async function updateShipDetails(shipInfo){
   }
 }
 
-
-// Delete ship functionality
-// document.getElementById("delete-ship").addEventListener("click",async ()=>{
-//   try {
-//     var response = await fetch("http://127.0.0.1:8000/api/ships/delete/"+id,{
-//       method:"DELETE",
-//       headers:{
-//         "Cotent-Type":"application/json",
-//         "Authorization": "Bearer "+accessToken
-//       }
-//     })
-//     var data = await response.json()
-//     if(data){
-//       alert(`${data.name} is Deleted Successfully`)
-//       window.location.href="../views/ships.html"
-//     }
-//   } catch (error) {
-//     console.log(error);
-    
-//   }
-// })

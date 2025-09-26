@@ -26,6 +26,7 @@ async function loginApiCall(userCredentials){
             alert("Login Successful")
             window.location.href="../view/home.html"
             localStorage.setItem("accessToken",data.access)
+            localStorage.setItem("userId",data.user_id)
         }
         else{
             alert(JSON.stringify(response.error)+" User credentials")
