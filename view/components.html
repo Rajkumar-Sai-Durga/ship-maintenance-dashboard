@@ -52,19 +52,15 @@
                     <p class="text-secondary">Manage and track all ship components</p>
                 </div>
             </div>
-            <div class="row px-0 border py-2 bg-light rounded-2 px-3"> 
+            <div class="row border py-2 bg-light rounded-2 py-2"> 
                 <div class="col-sm-7 px-0 ">
                     <div class="row">
-                        <div class="col-sm ms-2 position-relative">
+                        <div class="col-sm-4 ms-2 position-relative">
                             <label for="ship-id-dropdown" class="down-arrow">
                                 <i class="bi bi-caret-down-fill"></i>
                             </label>
                             <select id="ship-id-dropdown" class="form-control">
                             </select>
-                        </div>
-                        <div class="col-sm-8 d-flex">
-                            <input class="form-control me-2" type="search" id="search-input" placeholder="Search Component by Name, Id, Serial number" aria-label="Search"/>
-                            <button class="btn btn-styles text-light search" id="search-input-btn"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
                 </div>
@@ -78,7 +74,7 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content p-3">
                                 <div class="modal-header border-bottom-0">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Ship Details</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Component Details</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body d-flex flex-column gap-3">
@@ -123,7 +119,7 @@
                <th>
                    <tr>
                        <th>ID</th>
-                       <th>NAME</th>
+                       <th>COMPONENT NAME</th>
                        <th>SERIAL NUMBER</th>
                        <th>INSTALLED</th>
                        <th>LAST MAINTENANCE</th>

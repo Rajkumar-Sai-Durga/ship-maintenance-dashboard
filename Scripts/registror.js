@@ -154,7 +154,7 @@ async function registorApi(userDetails) {
 
     if(response.ok){
       alert("Registration Successfull, Login now");
-      window.location.href="../index.log"
+      window.location.href="../index.html"
     }
     else{
       alert(JSON.stringify(response.error))

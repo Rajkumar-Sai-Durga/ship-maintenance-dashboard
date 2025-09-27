@@ -23,7 +23,6 @@ async function loginApiCall(userCredentials){
         var data = await response.json()
         
         if(response.ok){
-            alert("Login Successful")
             window.location.href="../view/home.html"
             localStorage.setItem("accessToken",data.access)
             localStorage.setItem("userId",data.user_id)
@@ -56,3 +55,4 @@ document.getElementById("passLock").addEventListener("click",()=>{
     var pass = document.getElementById("password");
     pass.type="password";
 })
+

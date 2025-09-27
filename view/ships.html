@@ -70,7 +70,7 @@
         </div>
     </section>
 
-    <!-- Ships list and add new ship -->
+    <!--  add new ship -->
     <section>
         <div class="container px-0 d-flex flex-column gap-3 my-3">
             <div class="row px-0 border py-2 bg-light rounded-2 px-3"> 
@@ -128,9 +128,9 @@
 
     <!-- Ships list in table -->
      <section>
-        <div class="container px-0">
-            <table class="table">
-               <th>
+        <div class="container px-0" style="max-height:450px; overflow-y:auto;">
+            <table class="table table-striped align-middle">
+               <thead class="table-light sticky-top">
                    <tr>
                        <th>ID</th>
                        <th>NAME</th>
@@ -141,7 +141,7 @@
                        <th>STATUS</th>
                        <th class="text-end">ACTIONS</th>
                    </tr>
-               </th>
+               </thead>
                <tbody id="table-body">
                    
                </tbody>

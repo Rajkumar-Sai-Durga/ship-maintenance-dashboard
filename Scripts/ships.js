@@ -47,7 +47,6 @@ function displayShips(ships) {
   var str = ``;
   ships.forEach((ship) => {
     str += `
-        <div class="py-1">
           <tr>
             <td >${ship.id}</td>
             <td >${ship.name}</td>
@@ -76,12 +75,11 @@ function displayShips(ships) {
                   </div>
                 </div>
               </div>
-              <i class="bi bi-three-dots-vertical p-2 more" onclick="shipDetails(${
+              <i class="bi bi-info-circle-fill p-2 more" onclick="shipDetails(${
                 ship.id
               })"></i>
             </td>
           </tr>
-        </div>
         `;
     document.getElementById("table-body").innerHTML = "";
     document.getElementById("table-body").innerHTML = str;
