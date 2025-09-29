@@ -25,7 +25,7 @@ async function loginApiCall(userCredentials){
         if(response.ok){
             window.location.href="../view/home.html"
             localStorage.setItem("accessToken",data.access)
-            localStorage.setItem("userId",data.user_id)
+            localStorage.setItem("userId",data.user_id-1)
         }
         else{
             alert(JSON.stringify(response.error)+" User credentials")

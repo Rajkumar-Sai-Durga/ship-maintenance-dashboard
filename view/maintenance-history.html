@@ -6,7 +6,7 @@
     <title>Ship Components</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../Styles/components.css">
+    <link rel="stylesheet" href="../Styles/maintenance-history.css">
   </head>
   <body>
     <!-- nav bar -->
@@ -28,10 +28,10 @@
                         <a class="nav-link" href="./ships.html">Ships</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-color fw-bold" href="#">Components</a>
+                        <a class="nav-link" href="../view/components.html">Components</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./maintenance-history.html">Maintenance Job</a>
+                        <a class="nav-link active text-color fw-bold" href="#">Maintenance Job</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -48,51 +48,79 @@
         <div class="container px-0 d-flex flex-column gap-3 my-3">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4>SHIP COMPONENTS</h4>
+                    <h4>MAINTENANCE HISTORY</h4>
                     <p class="text-secondary">Manage and track all ship components</p>
                 </div>
             </div>
             <div class="row border py-2 bg-light rounded-2 py-2"> 
                 <div class="col-sm-7 px-0 ">
                     <div class="row">
-                        <div class="col-sm-4 ms-2 position-relative">
+                        <div class="col-sm ms-2 position-relative pe-0 me-0">
                             <label for="ship-id-dropdown" class="down-arrow">
                                 <i class="bi bi-caret-down-fill"></i>
                             </label>
-                            <select id="ship-id-dropdown" class="form-control">
+                            <select id="ship-id-dropdown" class="form-control" onchange="searchValues()">
+                            </select>
+                        </div>
+                        <div class="col-sm ms-2 position-relative px-0 me-0">
+                            <label for="status-dropdown" class="down-arrow">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </label>
+                            <select id="priority-dropdown" class="form-control" onchange="searchValues()">
+                                <option value="">All Priorities</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="col-sm ms-2 position-relative px-0 me-0">
+                            <label for="priority-dropdown" class="down-arrow">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </label>
+                            <select id="status-dropdown" class="form-control" onchange="searchValues()">
+                                <option value="">Any Status</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Pending">Pending</option>
+                                <option value="On Hold">On Hold</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-5 d-flex justify-content-end align-items-center">
-                    <!-- Button for add new ship component -->
-                    <button type="button" class="btn btn-primary btn-styles" id="addComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="bi bi-plus-lg"></i> New Component
+                    <!-- Button for add new Job -->
+                    <button type="button" class="btn btn-primary btn-styles" id="addJob" data-bs-toggle="modal" data-bs-target="#Maintenance_history">
+                        <i class="bi bi-plus-lg"></i> New JOB
                     </button>
-                    <!--Form for Ship Component Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!--Form for Maintenance history Modal -->
+                    <div class="modal fade" id="Maintenance_history" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content p-3">
                                 <div class="modal-header border-bottom-0">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Component Details</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New Maintenance Job</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body d-flex flex-column gap-3">
                                     <div>
-                                        <label for="component-name" class="form-label">COMPONENT NAME</label>
-                                        <input type="text" id="component-name" class="form-control" placeholder="Example: Radar System">
+                                        <label for="component-name" class="form-label">JOB TYPE</label>
+                                        <input type="text" id="history-type" class="form-control" placeholder="Example: Electrical Inspection">
                                     </div>
                                     <div>
-                                        <label for="serial-number" class="form-label">SERIAL NUMBER</label>
-                                        <input type="text" id="serial-number" class="form-control" placeholder="Example: RAD-2025-004">
+                                        <label for="form-priority-dropdown" class="form-label">PRIORITY</label>
+                                        <select id="form-priority-dropdown" class="form-control">
+                                            <option value="">All Priorities</option>
+                                            <option value="High">High</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Low">Low</option>
+                                        </select>
                                     </div>
                                     <div>
-                                        <label for="installed-date" class="form-label">INSTALLED DATE</label>
-                                        <input type="date" id="installed-date" class="form-control" >
-                                    </div>
-                                    <div>
-                                        <label for="last-maintenance-date" class="form-label">LAST MAINTENANCE DATE</label>
-                                        <input type="date" id="last-maintenance-date" class="form-control">
+                                        <label for="form-status-dropdown" class="form-label">STATUS</label>
+                                        <select id="form-status-dropdown" class="form-control">
+                                            <option value="" disabled selected>Any Status</option>
+                                            <option value="Completed">Completed</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="On Hold">On Hold</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="ship-ids" class="form-label">SHIP ID</label>
@@ -102,7 +130,7 @@
                                 </div>
                                 <div class="modal-footer border-top-0">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="postNewShip">Add</button>
+                                    <button type="button" class="btn btn-primary" id="postNewJob">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -112,17 +140,17 @@
         </div>
     </section>
 
-    <!-- Components list table -->
+    <!-- Maintenance history list table -->
      <section>
         <div class="container px-0">
             <table class="table">
                <th>
                    <tr>
                        <th>ID</th>
-                       <th>COMPONENT NAME</th>
-                       <th>SERIAL NUMBER</th>
-                       <th>INSTALLED</th>
-                       <th>LAST MAINTENANCE</th>
+                       <th>JOB TYPE</th>
+                       <th>STARTED</th>
+                       <th>PRIORITY</th>
+                       <th>STATUS</th>
                        <th class="text-end">ACTIONS</th>
                    </tr>
                </th>
@@ -133,6 +161,6 @@
      </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="../Scripts/components.js"></script>
+    <script src="../Scripts/maintenance-history.js"></script>
   </body>
 </html>
