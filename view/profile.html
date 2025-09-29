@@ -42,19 +42,68 @@
         </div>
     </nav>
 
-    <section class="bg-primary">
-        <div class="container d-flex align-items-center text-light p-0">
+    <section>
+        <!-- tiltes -->
+        <div class="container my-4">
+            <h4>MY PROFILE</h4>
+            <p class="text-secondary">Manage your personal information</p>
+        </div>
+        <div class="container d-flex align-items-center text-light px-5 profile">
             <i class="bi bi-person-circle profile-details-icon me-4"></i>
             <div>
-                <h2 id="prile-name">Name</h2>
-                <p class="mb-0" id="prile-role">role</p>
-                <p class="mb-0" id="prile-email">email</p>
+                <h2 id="profile-name">Name</h2>
+                <p class="mb-0" id="profile-role">role</p>
+                <p class="mb-0" id="profile-email">email</p>
             </div>
         </div>
-    </section>
-    <section>
-        <div class="container">
+        <div class="container p-5 border d-flex flex-column gap-3">
+            <div class="row">
+                <div class="col-sm">
+                    <label class="form-label">First Name</label>
+                    <p class="bg-secondary-subtle py-2 px-3 rounded-2" id="first-name">Sai</p>
+                </div>
+                <div class="col-sm">
+                    <label class="form-label">Last Name</label>
+                    <p class="bg-secondary-subtle py-2 px-3 rounded-2" id="last-name">Sai</p>
+                </div>
+            </div>
+            <div>
+                <label class="form-label">Email Address</label>
+                <p class="bg-secondary-subtle py-2 px-3 rounded-2" id="email">Sai@1234</p>
+            </div>
+            <div>
+                <label class="form-label">Username</label>
+                <p class="bg-secondary-subtle py-2 px-3 rounded-2" id="username">Sai@1234</p>
+            </div>
+            <div>
+                <label class="form-label">Role</label>
+                <p class="bg-secondary-subtle py-2 px-3 rounded-2" id="role">Sai@1234</p>
+            </div>
+            <div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="bi bi-pencil-square me-3"></i>Update Profile
+                </button>
 
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Profile</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            This Feature not availabe yet.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Update</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
