@@ -40,3 +40,8 @@ function displayProfileInfo(userInfo){
     document.getElementById("username").innerHTML=user.username
     document.getElementById("role").innerHTML=user.role
 }
+
+document.getElementById("logout").addEventListener("click",()=>{
+    localStorage.clear();
+    window.location.href="../index.html"
+})

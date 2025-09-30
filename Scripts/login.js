@@ -28,13 +28,13 @@ async function loginApiCall(userCredentials){
             localStorage.setItem("userId",data.user_id-1)
         }
         else{
-            alert(JSON.stringify(response.error)+" User credentials")
+            alert(data.detail.toUpperCase())
+            
         }
     } catch (error) {
         alert("Login Failed due to server")
     }
 }
-
 document.getElementById("passUnlock").addEventListener("click",()=>{
     var unLock = document.getElementById("passUnlock");
     var lock = document.getElementById("passLock");

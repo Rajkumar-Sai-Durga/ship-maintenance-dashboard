@@ -74,68 +74,76 @@ async function componentsApiCall(shipId,priority,status) {
 
 // Displaying the Maintenance history
 function displayHistory(history) {
-  var str = ``;
-  history.forEach((record) => {
-    str += `
-        <div class="py-1">
-          <tr>
-            <td >${record.id}</td>
-            <td >${record.type}</td>
-            <td >${foramatedDate(record.created_at)}</td>
-            <td >${record.priority}</td>
-            <td ><p class="${record.status} fw-bolder d-inline">${record.status}</p></td>
-            <td class="d-flex align-items-center justify-content-end">
-              <!-- update job -->
-              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#update-component-${record.id}">
-                <i class="bi bi-pencil-square p-2"></i>
-              </button>
-
-              <!--update job Modal -->
-              <div class="modal fade" id="update-component-${record.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                      <h1 class="modal-title fs-5 " id="exampleModalLabel">Update Component</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex flex-column gap-3">
-                        <div>
-                            <label for="job-type-${record.id}" class="form-label">JOB TYPE</label>
-                            <input type="text" id="job-type-${record.id}" class="form-control" placeholder="Example: Electricla Inspection">
-                        </div>
-                        <div>
-                            <label for="priority-${record.id}" class="form-label">PRIORITY</label>
-                            <select id="priority-${record.id}" class="form-control">
-                              <option value="" disabled>Priorities</option>
-                              <option value="High">High</option>
-                              <option value="Medium">Medium</option>
-                              <option value="Low">Low</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="status-${record.id}" class="form-label">STATUS</label>
-                            <select id="status-${record.id}" class="form-control">
-                              <option value="" disabled>Status</option>
-                              <option value="Completed">Completed</option>
-                              <option value="Pending">Pending</option>
-                              <option value="On Hold">On Hold</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer border-top-0">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary" onclick="updateJob(${record.id},${record.ship})">Update</button>
+  if(history.length>0){
+    var str = ``;
+    history.forEach((record) => {
+      str += `
+          <div class="py-1">
+            <tr>
+              <td >${record.id}</td>
+              <td >${record.type}</td>
+              <td >${foramatedDate(record.created_at)}</td>
+              <td >${record.priority}</td>
+              <td ><p class="${record.status} fw-bolder d-inline">${record.status}</p></td>
+              <td class="d-flex align-items-center justify-content-end">
+                <!-- update job -->
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#update-component-${record.id}">
+                  <i class="bi bi-pencil-square p-2"></i>
+                </button>
+  
+                <!--update job Modal -->
+                <div class="modal fade" id="update-component-${record.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header border-bottom-0">
+                        <h1 class="modal-title fs-5 " id="exampleModalLabel">Update Component</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body d-flex flex-column gap-3">
+                          <div>
+                              <label for="job-type-${record.id}" class="form-label">JOB TYPE</label>
+                              <input type="text" id="job-type-${record.id}" class="form-control" placeholder="Example: Electricla Inspection">
+                          </div>
+                          <div>
+                              <label for="priority-${record.id}" class="form-label">PRIORITY</label>
+                              <select id="priority-${record.id}" class="form-control">
+                                <option value="" disabled>Priorities</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                              </select>
+                          </div>
+                          <div>
+                              <label for="status-${record.id}" class="form-label">STATUS</label>
+                              <select id="status-${record.id}" class="form-control">
+                                <option value="" disabled>Status</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Pending">Pending</option>
+                                <option value="On Hold">On Hold</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="updateJob(${record.id},${record.ship})">Update</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </div>
-        `;
-    document.getElementById("table-body").innerHTML = "";
-    document.getElementById("table-body").innerHTML = str;
-  });
+              </td>
+            </tr>
+          </div>
+          `;
+    });
+  }else{
+    var str=`
+      <tr>
+        <td class="text-center py-4 text-secondary fw-bolder opacity-50" colspan="6"> No history available</td>
+      </tr>
+    `
+  }
+  document.getElementById("table-body").innerHTML = "";
+  document.getElementById("table-body").innerHTML = str;
 }
 function foramatedDate(input) {
   var date = new Date(input);
@@ -170,7 +178,7 @@ document.getElementById("postNewJob").addEventListener("click", async () => {
     
     // post api call
     var response = await fetch(
-      "http://127.0.0.1:8000/api/ship-components/create",
+      "http://127.0.0.1:8000/api/maintenance-jobs/create",
       {
         method: "POST",
         headers: {

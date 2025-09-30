@@ -44,46 +44,55 @@ shipApiCall();
 
 // Displaying the ships
 function displayShips(ships) {
-  var str = ``;
-  ships.forEach((ship) => {
-    str += `
-          <tr>
-            <td >${ship.id}</td>
-            <td >${ship.name}</td>
-            <td >${ship.imo_number}</td>
-            <td >${ship.flag}</td>
-            <td >${foramatedDate(ship.updated_at)}</td>
-            <td >${foramatedDate(ship.created_at)}</td>
-            <td><p class="${ship.status} d-inline">${ship.status}</p></td>
-            <td class="text-end">
-              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                <i class="bi bi-trash3-fill delete p-2"></i>
-              </button>
-              <!-- Modal -->
-              <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content p-4">
-                    <div class="modal-body p-0 mb-4">
-                      <h5 class="mb-0 text-start">ARE YOU SURE?</h5>
-                    </div>
-                    <div class="modal-footer border-top-0 p-0 justify-content-start">
-                      <button type="button" class="btn btn-secondary ms-0" data-bs-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-danger" onclick="deleteShip(${
-                        ship.id
-                      })">Delete</button>
+  if(ships.length>0){
+
+    var str = ``;
+    ships.forEach((ship) => {
+      str += `
+            <tr>
+              <td >${ship.id}</td>
+              <td >${ship.name}</td>
+              <td >${ship.imo_number}</td>
+              <td >${ship.flag}</td>
+              <td >${foramatedDate(ship.updated_at)}</td>
+              <td >${foramatedDate(ship.created_at)}</td>
+              <td><p class="${ship.status} d-inline">${ship.status}</p></td>
+              <td class="text-end">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal-${ship.id}">
+                  <i class="bi bi-trash3-fill delete p-2 text-danger"></i>
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal-${ship.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-4">
+                      <div class="modal-body p-0 mb-4">
+                        <h5 class="mb-0 text-start">ARE YOU SURE?</h5>
+                      </div>
+                      <div class="modal-footer border-top-0 p-0 justify-content-start">
+                        <button type="button" class="btn btn-secondary ms-0" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteShip(${
+                          ship.id
+                        })">Delete</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <i class="bi bi-info-circle-fill p-2 more" onclick="shipDetails(${
-                ship.id
-              })"></i>
-            </td>
+                <i class="bi bi-info-circle-fill p-2 more text-primary" onclick="shipDetails(${
+                  ship.id
+                })"></i>
+              </td>
+            </tr>
+          `;
+    });
+  }else{
+        var str=`
+          <tr>
+            <td class="text-center py-4 text-secondary fw-bolder opacity-50" colspan="8"> No ships available</td>
           </tr>
-        `;
-    document.getElementById("table-body").innerHTML = "";
-    document.getElementById("table-body").innerHTML = str;
-  });
+        `
+      }
+      document.getElementById("table-body").innerHTML = "";
+      document.getElementById("table-body").innerHTML = str;
 }
 function foramatedDate(input) {
   var date = new Date(input);
@@ -151,9 +160,9 @@ document.getElementById("active").addEventListener("click", () => {
 });
 
 // seach ship api call
-document.getElementById("search-input-btn").addEventListener("click", () => {
+document.getElementById("search-input").addEventListener("input", () => {
   var inputSearch = document.getElementById("search-input").value;
-  console.log(allShips);
+  console.log(inputSearch);
   
   var shipArray = allShips.filter((element) => 
     element.imo_number == inputSearch || 
@@ -205,12 +214,15 @@ document.getElementById("search-input-btn").addEventListener("click", () => {
           </div>
           `;
       }) 
-    document.getElementById("table-body").innerHTML = "";
+    }
+    else{
+      var str = `
+        <tr>
+          <td colspan="8" class="text-center text-secondary fw-bolder"> No ships</d>
+        </tr>
+      `
+    }
     document.getElementById("table-body").innerHTML = str;
-  }
-  else{
-    document.getElementById("table-body").innerHTML = "";
-  }
 });
 
 // post request for add new ship
